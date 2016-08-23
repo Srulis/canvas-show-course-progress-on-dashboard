@@ -67,21 +67,6 @@ $(function(){
             });
 
             console.log("  Adding current progress hover events.");
-            /* TODO: fix hover states
-            $('.progress--current').hover(function(){
-                $(this).css({
-                    'height': '8px',
-                    'bottom': '8px',
-                });
-            },
-            function(){
-                $(this).css({
-                    'height': '4px',
-                    'bottom': '0px',
-                });
-            });
-            */
-
         }
 
         var insertExpectedProgress = function(course, progress) {
@@ -106,21 +91,6 @@ $(function(){
             });
 
             console.log("  Adding expected progress hover events.");
-            /* TODO: fix hover states
-            $('.progress--expected').hover(function(){
-                $(this).css({
-                    'height': '8px',
-                    'bottom': '4px',
-                });
-            },
-            function(){
-                $(this).css({
-                    'height': '4px',
-                    'bottom': '0px',
-                });
-            });
-            */
-
         }
 
         var calculateExpectedProgress = function(start, end) {
@@ -141,35 +111,22 @@ $(function(){
             if(progress >= 0) {
                 return progress;
             } else {
-                console.log("  Course dates error, not displaying expected progress.");
-                /* TODO: fix positioning
-                console.log("repositoning current progress bar");
-                $('.progress--current').addClass("without_expected--progress");
-                $('.progress--current.without_expected--progress').css({
-                    'bottom': '0px',
-                });
-                $('.progress--current.without_expected--progress').hover(function(){
-                    $(this).css({
-                        'height': '8px',
-                        'bottom': '4px',
-                    });
-                },
-                function(){
-                    $(this).css({
-                        'height': '4px',
-                        'bottom': '0px',
-                    });
-                });
-                */
-
+                console.log("  No expected progress to display");
                 return 0;
+            }
+        }
+
+        var addExpectedClass = function(state) {
+            if(state == true) {
+                $(".progress--current").addClass("with_progress--expected");
+            } else {
+                $(".progress--current").addClass("without_progress--expected");
             }
         }
 
         console.log("  Getting course progress information...");
         var getCurrentProgress = $.getJSON(currentProgressJsonURL, function(data) {
             progressData = data;
-            console.log(progressData);
         });
 
         getCurrentProgress.success(function(){
@@ -194,8 +151,10 @@ $(function(){
 
                             console.log("  Inserting expected progress...");
                             insertExpectedProgress(course.id, expectedProgress);
+                            addExpectedClass(true);
                         } else {
                             console.log("  Course does not have start/end dates, won't add expected progress.");
+                            addExpectedClass(false);
                         }
                     }
                 });
