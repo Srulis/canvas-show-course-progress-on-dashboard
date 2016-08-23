@@ -2,6 +2,7 @@
  * canvas-show-course-progress-on-dashboard.js
  * by: Spencer Lawson slawson@instructure.com
  * by: Danny Wahl danny@instructure.com
+ * by: Julian Ridden julian@instructure.com
  * Adds a current progress and expected progress
  * bar to the course tile.  Current progress is
  * based on the module requirements and expectedProgress
