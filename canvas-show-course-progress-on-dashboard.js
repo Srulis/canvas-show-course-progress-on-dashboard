@@ -37,7 +37,7 @@ $(function(){
             var currentProgressColor = "#0c0";
             var courseID = course;
             var progress = toPercent(progress);
-            var currentProgressAsPercent = progress + "%";
+            var currentProgressAsPercent = progress.toFixed() + "%";
 
             console.log("  Adding current progress meter to course " + courseID + " tile.");
             $('div[data-reactid=".0.$' + courseID + '"]').append(currentProgressMeter);
