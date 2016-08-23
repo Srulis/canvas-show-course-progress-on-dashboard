@@ -26,12 +26,13 @@ $(function(){
             console.log("  Converting value " + value + " to percentage.");
             if(value < 1) {
                 var percentage = value * 100;
-                percentage = percentage.toFixed();
             } else {
                 console.log("  Value is > 1, returning rounded original value.");
             }
             console.log("  Returning converted percentage " + percentage);
-            return percentage.toFixed();
+            percentage = percentage.toFixed();
+            percentage = percentage + "%";
+            return percentage;
         }
 
         var insertCurrentProgress = function(course, progress) {
@@ -39,7 +40,6 @@ $(function(){
             var currentProgressColor = "#0c0";
             var courseID = course;
             var progress = toPercent(progress);
-            var currentProgressAsPercent = progress + "%";
 
             console.log("  Adding current progress meter to course " + courseID + " tile.");
             $('div[data-reactid=".0.$' + courseID + '"]').append(currentProgressMeter);
@@ -56,13 +56,13 @@ $(function(){
 
             console.log("  Styling current progress bar.");
             $('.progress--current').css({
-                'width': currentProgressAsPercent,
+                'width': progress,
                 'height': '4px',
                 'position': 'relative',
                 'bottom': '4px',
                 'background-color': currentProgressColor,
             }).attr({
-                'title': 'Current progress: ' + currentProgressAsPercent,
+                'title': 'Current progress: ' + progress,
                 'data-tooltip': '{"tooltipClass":"popover popover-padded", "position":"bottom"}',
             });
 
@@ -89,20 +89,19 @@ $(function(){
             var expectedProgressColor = "#ccc";
             var progress = toPercent(progress);
             var courseID = course;
-            var expectedProgressAsPercent = progress + "%";
 
             console.log("  Adding expected progress meter.");
             $('.progress--current').before(expectedProgressMeter);
 
             console.log("  Styling expected progress meter.");
             $('.progress--expected').css({
-                'width': expectedProgressAsPercent,
+                'width': progress,
                 'height': '4px',
                 'position': 'relative',
                 'bottom': '0px',
                 'background-color': expectedProgressColor,
             }).attr({
-                'title': 'Expected progress: ' + expectedProgressAsPercent,
+                'title': 'Expected progress: ' + progress,
                 'data-tooltip': '{"tooltipClass":"popover popover-padded", "position":"bottom"}',
             });
 
