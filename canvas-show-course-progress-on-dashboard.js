@@ -125,11 +125,11 @@ $(function(){
         }
 
         console.log("  Getting course progress information...");
-        var getCurrentProgress = $.getJSON(jsonURL, function(data) {
+        var getProgress = $.getJSON(jsonURL, function(data) {
             progressData = data;
         });
 
-        getCurrentProgress.success(function(){
+        getProgress.success(function(){
             console.log("  Course progress data received, checking Current and Expected progress...");
             if(progressData.length > 0) {
                 $.each(progressData, function(idx, course){
@@ -163,7 +163,7 @@ $(function(){
             }
         });
 
-        getCurrentProgress.error(function(){
+        getProgress.error(function(){
             console.log(" Error getting course progress data, exiting.");
         });
 
