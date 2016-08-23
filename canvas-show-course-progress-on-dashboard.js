@@ -26,11 +26,12 @@ $(function(){
             console.log("  Converting value " + value + " to percentage.");
             if(value < 1) {
                 var percentage = value * 100;
+                percentage = percentage.toFixed();
             } else {
-                console.log("  Value is > 1, returning original value.");
+                console.log("  Value is > 1, returning rounded original value.");
             }
             console.log("  Returning converted percentage " + percentage);
-            return percentage;
+            return percentage.toFixed();
         }
 
         var insertCurrentProgress = function(course, progress) {
@@ -38,7 +39,7 @@ $(function(){
             var currentProgressColor = "#0c0";
             var courseID = course;
             var progress = toPercent(progress);
-            var currentProgressAsPercent = progress.toFixed() + "%";
+            var currentProgressAsPercent = progress + "%";
 
             console.log("  Adding current progress meter to course " + courseID + " tile.");
             $('div[data-reactid=".0.$' + courseID + '"]').append(currentProgressMeter);
