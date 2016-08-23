@@ -17,7 +17,7 @@ $(function(){
 
         console.log("  User is on dashboard, continuing...");
         var domain = window.location.hostname;
-        var currentProgressJsonURL = "https://" + domain + ":443/api/v1/courses?include[]=course_progress&enrollment_type=student";
+        var jsonURL = "https://" + domain + ":443/api/v1/courses?include[]=course_progress&enrollment_type=student";
         var progressData = {};
         var currentProgress = null;
         var expectedProgress = null;
@@ -125,7 +125,7 @@ $(function(){
         }
 
         console.log("  Getting course progress information...");
-        var getCurrentProgress = $.getJSON(currentProgressJsonURL, function(data) {
+        var getCurrentProgress = $.getJSON(jsonURL, function(data) {
             progressData = data;
         });
 
