@@ -2,7 +2,9 @@
 A script that shows current progress and expected progress on the course tile.
 
 ## Usage
-1. Upload script to custom JavaScript in the theme editor.
-2. View progress on course tiles, hover for current percentage and expected percentage.
+1. Select a render style (e.g. bar, text, etc...) and specify that for both current progress and expected progress.
+2. Upload script to custom JavaScript in the theme editor.
+3. View progress on course tiles, hover for current percentage and expected percentage.
 
-![Canvas Course tile with progress status added](http://i.imgur.com/2nTiFRH.png)
+<img src="http://i.imgur.com/2nTiFRH.png" alt="Canvas Course tile with progress status added" style="width: 50%;">
+Example of "bar" style output.
