@@ -197,7 +197,7 @@ $(function(){
                         console.log("  Course Progress not enabled for current course (" + course.id + "), skipping...");
                     } else {
                         console.log("  Course " + course.id + " has progress, adding current progress...");
-                        insertProgress(course.id, "current", "text", currentProgress);
+                        insertProgress(course.id, "current", "bar", currentProgress);
 
                         console.log("  Checking if course " + course.id + " has start/end dates...");
                         if(course.hasOwnProperty("start_at") && course.hasOwnProperty("end_at") && course.start_at != null && course.end_at != null) {
