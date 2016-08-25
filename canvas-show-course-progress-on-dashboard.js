@@ -35,62 +35,118 @@ $(function(){
             return percentage;
         }
 
-        var insertCurrentProgress = function(course, progress) {
-            var currentProgressMeter = '<div id="progressbar"><div class="progress--current"></div></div>';
-            var currentProgressColor = "#0c0";
-            var courseID = course;
-            var progress = toPercent(progress);
+/***********************************************************************
+ * insertProgress() takes a style.  Included is "bar", defined are "pie"
+ * and "text".  Each type is where the output is created.  If you want
+ * to create a new output style (e.g. "graph"), add it to the switch in
+ * insertProgress() and then add its functionality to a new function.
+ * for consistency that function should start with "render", e.g.
+ * renderGraph().  The render function should check for a progress type
+ * the only values for progress types are "current" and "expected".
+ **********************************************************************/
 
-            console.log("  Adding current progress meter to course " + courseID + " tile.");
-            $('div[data-reactid=".0.$' + courseID + '"]').append(currentProgressMeter);
+        var insertProgress = function(course, type, style, progress) {
+            var course = course;
+            var style = style;
+            var type = type;
+            var progress = progress;
 
-            console.log("  Hiding bottom border on course " + courseID + " tile.");
-            $('div[data-reactid=".0.$' + courseID + '"]').css({
-                'border-bottom-color': '#fff',
-            });
-
-            console.log("  Styling progress meters container.");
-            $('#progressbar').css({
-                'height': '0px'
-            });
-
-            console.log("  Styling current progress bar.");
-            $('.progress--current').css({
-                'width': progress,
-                'height': '4px',
-                'position': 'relative',
-                'bottom': '4px',
-                'background-color': currentProgressColor,
-            }).attr({
-                'title': 'Current progress: ' + progress,
-                'data-tooltip': '{"tooltipClass":"popover popover-padded", "position":"bottom"}',
-            });
-
-            console.log("  Adding current progress hover events.");
+            switch(style) {
+                case "bar":
+                    renderBar(course, type, progress);
+                    break;
+                case "pie":
+                    renderPie(course, type, progress);
+                    break;
+                case "text":
+                    renderText(course, type, progress);
+                    break;
+                default:
+                    renderBar(course, type, progress);
+            }
         }
 
-        var insertExpectedProgress = function(course, progress) {
-            var expectedProgressMeter = '<div class="progress--expected"></div>';
-            var expectedProgressColor = "#ccc";
-            var progress = toPercent(progress);
-            var courseID = course;
+        var renderBar = function(course, type, progress) {
+            var course = course;
+            var type = type;
+            var progress = progress;
+            if(type == "current") {
+                var currentProgressMeter = '<div id="progressbar"><div class="progress--current"></div></div>';
+                var currentProgressColor = "#0c0";
+                var courseID = course;
+                var progress = toPercent(progress);
 
-            console.log("  Adding expected progress meter.");
-            $('.progress--current').before(expectedProgressMeter);
+                console.log("  Adding current progress meter to course " + courseID + " tile.");
+                $('div[data-reactid=".0.$' + courseID + '"]').append(currentProgressMeter);
 
-            console.log("  Styling expected progress meter.");
-            $('.progress--expected').css({
-                'width': progress,
-                'height': '4px',
-                'position': 'relative',
-                'bottom': '0px',
-                'background-color': expectedProgressColor,
-            }).attr({
-                'title': 'Expected progress: ' + progress,
-                'data-tooltip': '{"tooltipClass":"popover popover-padded", "position":"bottom"}',
-            });
+                console.log("  Hiding bottom border on course " + courseID + " tile.");
+                $('div[data-reactid=".0.$' + courseID + '"]').css({
+                    'border-bottom-color': '#fff',
+                });
 
-            console.log("  Adding expected progress hover events.");
+                console.log("  Styling progress meters container.");
+                $('#progressbar').css({
+                    'height': '0px'
+                });
+
+                console.log("  Styling current progress bar.");
+                $('.progress--current').css({
+                    'width': progress,
+                    'height': '4px',
+                    'position': 'relative',
+                    'bottom': '4px',
+                    'background-color': currentProgressColor,
+                }).attr({
+                    'title': 'Current progress: ' + progress,
+                    'data-tooltip': '{"tooltipClass":"popover popover-padded", "position":"bottom"}',
+                });
+
+                console.log("  Adding current progress hover events.");
+            } else {
+                var expectedProgressMeter = '<div class="progress--expected"></div>';
+                var expectedProgressColor = "#ccc";
+                var progress = toPercent(progress);
+                var courseID = course;
+
+                console.log("  Adding expected progress meter.");
+                $('.progress--current').before(expectedProgressMeter);
+
+                console.log("  Styling expected progress meter.");
+                $('.progress--expected').css({
+                    'width': progress,
+                    'height': '4px',
+                    'position': 'relative',
+                    'bottom': '0px',
+                    'background-color': expectedProgressColor,
+                }).attr({
+                    'title': 'Expected progress: ' + progress,
+                    'data-tooltip': '{"tooltipClass":"popover popover-padded", "position":"bottom"}',
+                });
+
+                console.log("  Adding expected progress hover events.");
+            }
+        }
+
+        var renderPie = function(course, type, progress) {
+            var course = course;
+            var type = type;
+            var progress = progress;
+            if(type == "current") {
+
+            } else {
+
+            }
+        }
+
+        var renderText = function(course, type, progress) {
+            var course = course;
+            var type = type;
+            var progress = progress;
+            if(type == "current") {
+
+            } else {
+
+            }
         }
 
         var calculateExpectedProgress = function(start, end) {
@@ -116,14 +172,6 @@ $(function(){
             }
         }
 
-        var addExpectedClass = function(state) {
-            if(state == true) {
-                $(".progress--current").addClass("with_progress--expected");
-            } else {
-                $(".progress--current").addClass("without_progress--expected");
-            }
-        }
-
         console.log("  Getting course progress information...");
         var getProgress = $.getJSON(jsonURL, function(data) {
             progressData = data;
@@ -141,8 +189,7 @@ $(function(){
                         console.log("  Course Progress not enabled for current course (" + course.id + "), skipping...");
                     } else {
                         console.log("  Course " + course.id + " has progress, adding current progress...");
-                        console.log(course);
-                        insertCurrentProgress(course.id, currentProgress);
+                        insertProgress(course.id, "current", "bar", currentProgress);
 
                         console.log("  Checking if course " + course.id + " has start/end dates...");
                         if(course.hasOwnProperty("start_at") && course.hasOwnProperty("end_at") && course.start_at != null && course.end_at != null) {
@@ -150,11 +197,9 @@ $(function(){
                             expectedProgress = calculateExpectedProgress(course.start_at, course.end_at);
 
                             console.log("  Inserting expected progress...");
-                            insertExpectedProgress(course.id, expectedProgress);
-                            addExpectedClass(true);
+                            insertProgress(course.id, "expected", "bar", expectedProgress);
                         } else {
                             console.log("  Course does not have start/end dates, won't add expected progress.");
-                            addExpectedClass(false);
                         }
                     }
                 });
