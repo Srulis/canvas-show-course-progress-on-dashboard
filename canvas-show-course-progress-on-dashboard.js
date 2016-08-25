@@ -142,10 +142,18 @@ $(function(){
             var course = course;
             var type = type;
             var progress = progress;
+            var currentProgressMeter = '<div class="progress--current">' + progress + '</div>';
             if(type == "current") {
-
+                $('div[data-reactid=".0.$' + courseID + '.0.0"]').append(currentProgressMeter);
+                $(".progress--current").css({
+                    'color': '#fff',
+                    'font-size': '3em',
+                    'margin-right': '0.5em',
+                    'text-align': 'right',
+                    'text-shadow': '1px 1px 2px #000',
+                });
             } else {
-
+                console.log("  Expected progress is not output in this render type.");
             }
         }
 
@@ -189,7 +197,7 @@ $(function(){
                         console.log("  Course Progress not enabled for current course (" + course.id + "), skipping...");
                     } else {
                         console.log("  Course " + course.id + " has progress, adding current progress...");
-                        insertProgress(course.id, "current", "bar", currentProgress);
+                        insertProgress(course.id, "current", "text", currentProgress);
 
                         console.log("  Checking if course " + course.id + " has start/end dates...");
                         if(course.hasOwnProperty("start_at") && course.hasOwnProperty("end_at") && course.start_at != null && course.end_at != null) {
