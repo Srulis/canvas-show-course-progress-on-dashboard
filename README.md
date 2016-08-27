@@ -7,10 +7,11 @@ A script that shows current progress and expected progress on the course tile.
 3. View progress on course tiles, hover for current percentage and expected percentage.
 
 ## Examples
-<img src="http://i.imgur.com/2nTiFRH.png" alt="Canvas Course tile with progress status added as a bar" width="50%">
 
-Example of "bar" style output.
+Example of "Progress on the dashboard" as a progress bar that uses the tiles colour
 
-<img src="http://i.imgur.com/yoP22tK.png" alt="Canvas Course tile with progress status added as text" width="50%">
+<img src="http://imgur.com/sWOJPn2" alt="Canvas Course tile" width="50%">
 
-Example of "text" style output.
+Example of "Progress on the course homepage" style output. This uses the primary colour of the theme.
+
+<img src="http://imgur.com/JGHQAmO" alt="Canvas Course tile" width="50%">
