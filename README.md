@@ -10,8 +10,8 @@ A script that shows current progress and expected progress on the course tile.
 
 Example of "Progress on the dashboard" as a progress bar that uses the tiles colour
 
-<img src="http://imgur.com/sWOJPn2" alt="Canvas Course tile" width="50%">
+<img src="https://i.imgur.com/sWOJPn2.png" alt="Canvas Course tile" width="50%">
 
 Example of "Progress on the course homepage" style output. This uses the primary colour of the theme.
 
-<img src="http://imgur.com/JGHQAmO" alt="Canvas Course tile" width="50%">
+<img src="https://i.imgur.com/JGHQAmO.png" alt="Canvas Course tile" width="50%">
