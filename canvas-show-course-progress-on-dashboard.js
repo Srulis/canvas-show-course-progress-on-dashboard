@@ -16,7 +16,7 @@ $(document).ready(function(){
 
 	//Checking to see if on the dashboard, or the course student homepage
 	if(scriptDebug) console.log('Checking to see if on the dashboard, or course homepage as a student');
-	if(ENV.current_user_roles[1] === "student" && documentPathname === ("/courses/" + currentCourseID)){ 
+	if(/*ENV.current_user_roles[1] === "student" && ----Looks like the ENV object has changed in the latest update */ documentPathname === ("/courses/" + currentCourseID)){ 
 		//ensure that we are a student and on the course homepage
 		if(scriptDebug) console.log('... On student course homepage.');
 
@@ -111,7 +111,7 @@ $(document).ready(function(){
 			    		console.log('Has expected date: ' + currentProgressData.expectedProgressText);
 			    	}
 			    	//get the tile background colour
-			    	primaryColour = $('div.ic-DashboardCard[data-reactid=".0.$' + currentProgressData.id + '"] >div.ic-DashboardCard__header > div.ic-DashboardCard__header_hero').css('background-color');
+			    	primaryColour = $('div#DashboardCard_Container > div.ic-DashboardCard__box > div.ic-DashboardCard[data-reactid=".0.$' + currentProgressData.id + '"]').attr('style').split('border-bottom-color:').join('').split(';').join('');
 
 			    	//create the html for progress bar
 			    	progressBarHTML = '<div class="ic-DashboardCard__header_content progress_div"><p class="ic-DashboardCard__header-subtitle ellipsis">Progress</p><div class="progress-bar__bar-container" style="border: solid 1px ' + primaryColour + ';"><span style="text-align: center;  line-height: 18px; color:' + textColour + ';" class="progress_span"><div class="progress-bar__bar" style="width: 0px;background: ' + primaryColour +';" title = "Completed: ' + currentProgressData.percentageText + '" alt = "Completed: ' + currentProgressData.percentageText + '">' + currentProgressData.percentageText + '</div></span></div>';
